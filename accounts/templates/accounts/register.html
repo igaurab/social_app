@@ -1,0 +1,46 @@
+{% load static %}
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'accounts/auth.css' %}">
+  </head>
+  
+  <body>
+      <div class="container">
+        <h1>Signup</h1>
+        {% if form_error.all %}
+          {{ form_error.all }}
+        {% endif %}
+        <form id='authForm' method="POST">
+          {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" class="auth-input"/>
+            {% if form_error.username %}
+              {{ form_error.username }}
+            {% endif %}
+
+            <input type="email" name="email" placeholder="Email" class="auth-input"/>
+            {% if form_error.email %}
+              {{ form_error.email }}
+            {% endif %}
+
+            <input type="password" name="password1" placeholder="Password" class="auth-input"/>
+            {% if form_error.password1 %}
+              {{ form_error.password1 }}
+            {% endif %}
+
+            <input type="password" name="password2" placeholder="Confirm Password" class="auth-input"/>
+            {% if form_error.password2 %}
+              {{ form_error.password2 }}
+            {% endif %}
+            
+        </form>
+        <button id='submitButton' value="submit">Register</button>
+        <p>Already have an account? <a href="/login">Login</a></p> 
+      </div>
+  </body>
+  <script>
+    document.getElementById("submitButton").addEventListener("click", function() {
+      document.getElementById("authForm").submit();
+    });
+  </script>
+</html>
